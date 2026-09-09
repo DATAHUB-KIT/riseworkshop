@@ -3,3 +3,5 @@ classifier=pipeline('sentiment-analysis')
 classifier('this restuarant is very good')
   ###############################################################################
 
+model_name = "nlptown/bert-base-multilingual-uncased-sentiment"
+##################################################################################
