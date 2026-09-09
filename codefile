@@ -1,21 +1,36 @@
+few_prompt = """
+You are a sentiment classifier.
 
-!pip install genai
+Example 1
+Review: "I love this mobile."
+Sentiment: Positive
+
+Example 2
+Review: "Worst customer service ever."
+Sentiment: Negative
+
+Example 3
+Review: "The product is okay."
+Sentiment: Neutral
+
+Now classify:
+
+Review:
+"The laptop performance is excellent but the battery drains quickly."
+
+Sentiment:
+"""
+
+############################################################################
 
 from google import genai
-
 from google.colab import userdata
-
-GEMINI_API_KEY=userdata.get('  ')
-
-
-
+GEMINI_API_KEY=userdata.get('gemini1')
 client=genai.Client(api_key=GEMINI_API_KEY)
 
 response=client.models.generate_content(
-    model="gemini-3.5-flash",
-    contents="Hello Gemini My name is Scott ,How are you !!"
+model="gemini-3.5-flash",
+contents=prompt
 )
-
-
 
 print(response.text)
