@@ -1,0 +1,5 @@
+from transformers import pipeline
+classifier=pipeline('sentiment-analysis')
+classifier('this restuarant is very good')
+  ###############################################################################
+
