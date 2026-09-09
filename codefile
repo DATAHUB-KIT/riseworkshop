@@ -16,3 +16,8 @@ classifier = pipeline("sentiment-analysis",
 
 classifier('   ')
 ####################################################################
+from transformers import pipeline
+classifier = pipeline("zero-shot-classification")
+text = "       "
+candidate_labels = ["  ", "  ", "  "]
+classifier(text, candidate_labels)
