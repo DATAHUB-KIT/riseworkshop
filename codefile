@@ -21,3 +21,8 @@ classifier = pipeline("zero-shot-classification")
 text = "       "
 candidate_labels = ["  ", "  ", "  "]
 classifier(text, candidate_labels)
+################################################################
+from transformers import pipeline
+ner = pipeline("ner")
+sentence = " Sundar Pichai is the CEO of Google and lives in California.          "
+ner(sentence)
