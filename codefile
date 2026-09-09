@@ -5,3 +5,8 @@ classifier('this restuarant is very good')
 
 model_name = "nlptown/bert-base-multilingual-uncased-sentiment"
 ##################################################################################
+from transformers import AutoTokenizer,AutoModelForSequenceClassification
+
+model = AutoModelForSequenceClassification.from_pretrained(model_name)
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+############################################################################3
