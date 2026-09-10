@@ -1,36 +1,19 @@
-few_prompt = """
-You are a sentiment classifier.
+import pandas as pd
 
-Example 1
-Review: "I love this mobile."
-Sentiment: Positive
+df = pd.read_csv("/content/stddata.csv")
 
-Example 2
-Review: "Worst customer service ever."
-Sentiment: Negative
+df.head()
 
-Example 3
-Review: "The product is okay."
-Sentiment: Neutral
+###########################################3
+context = ""
+context += '\n'.join([f"{row['name']},{row['attendance']}" for _, row in df.iterrows()])
+print(context)
+##############################################3
+prompt = f"""
+QUERY: Identify the student with the lowest attendance.
 
-Now classify:
+CONTEXT:
 
-Review:
-"The laptop performance is excellent but the battery drains quickly."
-
-Sentiment:
+{context}
 """
-
-############################################################################
-
-from google import genai
-from google.colab import userdata
-GEMINI_API_KEY=userdata.get('gemini1')
-client=genai.Client(api_key=GEMINI_API_KEY)
-
-response=client.models.generate_content(
-model="gemini-3.5-flash",
-contents=prompt
-)
-
-print(response.text)
+###########################################################
