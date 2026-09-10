@@ -45,7 +45,10 @@ Year : 2021
 Return ONLY valid JSON.
 """
 
-
+######################################################
+import pandas as pd
+df=pd.read_csv("/content/std.csv")
+df
 
 #########################################################
 context = ""
