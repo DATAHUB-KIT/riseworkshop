@@ -15,3 +15,14 @@ response = client.chat.completions.create(
 )
 
 print(response.choices[0].message.content)
+#################################################
+prompt = """
+List three benefits of daily exercise.
+
+Return the output as a Markdown table with exactly two columns:
+
+Benefit
+Description
+
+Do not include any text before or after the table.
+"""
