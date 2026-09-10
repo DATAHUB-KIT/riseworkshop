@@ -1,1 +1,17 @@
+ !pip install -q groq
+###########################
+from groq import Groq
+from google.colab import userdata
 
+grokclient = Groq(
+    groq_api_key=userdata.get("grok2")
+)
+#########################################3
+response = client.chat.completions.create(
+    model="llama-3.3-70b-versatile",
+    messages=[
+        {"role": "user", "content": "Hi"}
+    ]
+)
+
+print(response.choices[0].message.content)
