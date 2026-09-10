@@ -48,3 +48,7 @@ Return ONLY valid JSON.
 
 
 #########################################################
+context = ""
+context += '\n'.join([f"{row['name']},{row['attendance']}" for _, row in df.iterrows()])
+print(context)
+###########################################################
