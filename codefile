@@ -26,3 +26,25 @@ Description
 
 Do not include any text before or after the table.
 """
+###################################################################
+prompt = """
+Create valid JSON for the following books.
+
+Title : Python Basics
+Author : John Smith
+Year : 2022
+
+Title : AI Essentials
+Author : Jane Doe
+Year : 2023
+
+Title : Machine Learning
+Author : Alan Brown
+Year : 2021
+
+Return ONLY valid JSON.
+"""
+
+
+
+#########################################################
