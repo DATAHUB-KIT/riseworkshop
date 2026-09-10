@@ -1,47 +1,50 @@
-!pip install pymupdf
-################################
+prompts = [
+    {
+        "title": "1. Vague Prompt",
+        "prompt": "Tell me about Python."
+    },
+    {
+        "title": "2. Contradictory Prompt",
+        "prompt": "Explain Python in one sentence and provide a detailed explanation with examples."
+    },
+    {
+        "title": "3. Refined Prompt",
+        "prompt": """
+Explain Python programming for beginners.
 
-from google import genai
-import fitz
-from google.colab import files
-from IPython.display import Markdown, display
-################################################33
+Instructions:
+- Write exactly five bullet points.
+- Keep each point under 20 words.
+- Mention:
+    * What Python is
+    * Major features
+    * Common applications
+    * Advantages
+    * One real-world example
 
-uploaded = files.upload()
-############################################3
-filename = list(uploaded.keys())[0]
-
-doc = fitz.open(filename)
-
-resume_text = ""
-
-for page in doc:
-    resume_text += page.get_text()
-
-print("Resume Loaded Successfully")
-print("-"*50)
-print(resume_text[:1500])
-####################################################
-prompt = f"""
-You are an experienced HR Manager, Career Coach and Technical Recruiter.
-
-Analyze the following resume carefully.
-
-Resume:
-
-{resume_text}
-
-Generate a detailed report.
-
-Include the following sections.
-
-# Candidate Summary
-
-# Suitable IT Job Categories
-
-# Overall Resume Score (100)
-
-Format the response in clean Markdown.
+Example format:
+• Python is an easy-to-learn programming language.
 """
-###############################################################33
+    }
+]
+
+# Generate responses
+for item in prompts:
+    print("="*80)
+    print(item["title"])
+    print("="*80)
+
+    print("\nPrompt:")
+    print(item["prompt"])
+
+    response = client.models.generate_content(
+        model="gemini-3.5-flash",
+        contents=item["prompt"]
+    )
+
+    print("\nGenerated Response:")
+    print(response.text)
+    print("\n")
+
+
 
