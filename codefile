@@ -43,3 +43,24 @@ Include the following sections.
 
 Format the response in clean Markdown.
 """
+########################################################################
+prompt = f"""
+You are an experienced HR Manager, and Expert Technical Recruiter.
+
+Analyze the following resume carefully.
+
+and how to improve my resume score
+
+Resume:
+
+{resume_text}
+
+Generate a detailed report.
+
+#skills
+#certifications
+#projects
+
+
+Format the response in clean Markdown.
+"""
