@@ -46,5 +46,17 @@ for item in prompts:
     print(response.text)
     print("\n")
 
+##################################################################
+prompt = f"""
+Summarize the article.
+Constraints:
 
+• Exactly 30 words
+• Use five bullet points
+• Simple English
+. AI advancements in healthcare:
+
+{article}
+"""
+########################################################################3
 
