@@ -1,23 +1,9 @@
-from transformers import ViTImageProcessor, ViTForImageClassification
+from google.colab import files
 from PIL import Image
-import requests
 
-# Load pre-trained mod-el
-processor = ViTImageProcessor.from_pretrained("google/vit-base-patch16-224")
-model = ViTForImageClassification.from_pretrained("google/vit-base-patch16-224")]
-############################################################################################
-url = "https://images.unsplash.com/photo-1517849845537-4d257902454a?w=500"
+uploaded = files.upload()
 
-image = Image.open(requests.get(url, stream=True).raw)
+image = Image.open(list(uploaded.keys())[0]).convert("RGB")
+
 image
-###########################################################3
-inputs = processor(images=image, return_tensors="pt")
-
-outputs = model(**inputs)
-
-logits = outputs.logits
-
-predicted_class = logits.argmax(-1).item()
-
-print("Predicted Class:")
-print(model.config.id2label[predicted_class])
+##########################################################
