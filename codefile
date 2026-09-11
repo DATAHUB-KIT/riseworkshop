@@ -13,3 +13,30 @@ Mention
 - Technology
 """
 ##############################################
+evaluation_prompt = f"""
+You are an AI evaluator.
+
+Compare the ORIGINAL PROMPT with the GENERATED IMAGE DESCRIPTION.
+
+Original Prompt
+
+{original_prompt}
+
+Generated Caption
+
+{caption}
+
+Evaluate
+
+1. Accuracy (1-5)
+
+2. Relevance (1-5)
+
+3. Completeness (1-5)
+
+4. Missing Objects
+
+5. Alignment Percentage
+
+Return your answer as a table.
+"""
