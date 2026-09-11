@@ -50,3 +50,54 @@ manual_scores = pd.DataFrame({
 
 manual_scores
 #################################################################
+judge_prompt = f"""
+You are an AI evaluator.
+
+Compare the following two responses.
+
+Question:
+
+Explain Machine Learning.
+
+----------------------------------
+
+Response A
+
+{output1}
+
+----------------------------------
+
+Response B
+
+{output2}
+
+----------------------------------
+
+Evaluate both responses using
+
+1. Accuracy
+
+2. Clarity
+
+3. Relevance
+
+4. Formatting
+
+5. Completeness
+
+Give a score between 1 and 5.
+
+Return a markdown table.
+
+Finally declare the winner.
+"""
+######################################################
+judge = client.models.generate_content(
+
+model="gemini-3.5-flash",
+
+contents=judge_prompt
+
+)
+
+print(judge.text)
