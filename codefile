@@ -12,3 +12,34 @@ audio_file = list(uploaded.keys())[0]
 
 print(audio_file)
 ##############################################
+import whisper
+
+model = whisper.load_model("base")
+
+result = model.transcribe(audio_file)
+
+transcript = result["text"]
+
+print(transcript)
+########################################################
+prompt = f"""
+
+You are an expert meeting assistant.
+
+Generate professional meeting minutes.
+
+Transcript:
+
+{transcript}
+
+Include:
+
+1. Meeting Summary
+2. Key Discussion Points
+3. Decisions Taken
+4. Next Meeting
+
+Present everything in Markdown.
+
+"""
+#######################################################################3
