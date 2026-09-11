@@ -1,66 +1,8 @@
-!pip install pymupdf
-####################################3
-from google import genai
-import fitz
-from google.colab import files
-from IPython.display import Markdown, display
-###########################################
-uploaded = files.upload()
-#################################33
-filename = list(uploaded.keys())[0]
+from transformers import ViTImageProcessor, ViTForImageClassification
+from PIL import Image
+import requests
 
-doc = fitz.open(filename)
-
-resume_text = ""
-
-for page in doc:
-    resume_text += page.get_text()
-
-print("Resume Loaded Successfully")
-print("-"*50)
-print(resume_text[:1500])
-######################################3
-prompt = f"""
-You are an experienced HR Manager, Career Coach and Technical Recruiter.
-
-Analyze the following resume carefully.
-
-Resume:
-
-{resume_text}
-
-Generate a detailed report.
-
-Include the following sections.
-
-# Candidate Summary
-
-# Technical Skills
-
-# Suitable IT Job Categories
-
-# Overall Resume Score (100)
-
-Format the response in clean Markdown.
-"""
-########################################################################
-prompt = f"""
-You are an experienced HR Manager, and Expert Technical Recruiter.
-
-Analyze the following resume carefully.
-
-and how to improve my resume score
-
-Resume:
-
-{resume_text}
-
-Generate a detailed report.
-
-#skills
-#certifications
-#projects
-
-
-Format the response in clean Markdown.
-"""
+# Load pre-trained mod-el
+processor = ViTImageProcessor.from_pretrained("google/vit-base-patch16-224")
+model = ViTForImageClassification.from_pretrained("google/vit-base-patch16-224")]
+############################################################################################
