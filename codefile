@@ -7,3 +7,37 @@ image = Image.open(list(uploaded.keys())[0]).convert("RGB")
 
 image
 ##########################################################
+from transformers import CLIPProcessor
+from transformers import CLIPModel
+
+model = CLIPModel.from_pretrained(
+    "openai/clip-vit-base-patch32"
+)
+
+processor = CLIPProcessor.from_pretrained(
+    "openai/clip-vit-base-patch32"
+)
+#############################################
+labels = [
+    "cat",
+    "dog",
+    "car",
+    "bicycle",
+    "horse"
+]
+
+inputs = processor(
+    text=labels,
+    images=image,
+    return_tensors="pt",
+    padding=True
+)
+
+outputs = model(**inputs)
+
+logits = outputs.logits_per_image
+
+probs = logits.softmax(dim=1)
+
+print(probs)
+###################################################
