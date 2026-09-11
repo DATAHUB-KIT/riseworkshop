@@ -30,3 +30,23 @@ response2 = client.models.generate_content(
 output2 = response2.text
 
 print(output2)
+################################################################################3
+import pandas as pd
+manual_scores = pd.DataFrame({
+
+"Criteria":[
+"Accuracy",
+"Relevance",
+"Format",
+"Completeness",
+"Grammar"
+],
+
+"Output 1":[5,4,2,4,5],
+
+"Output 2":[5,5,5,5,5]
+
+})
+
+manual_scores
+#################################################################
