@@ -1,61 +1,38 @@
-from google.colab import files
-from PIL import Image
+faq = {
+    "admission": "To apply, you need a high school diploma, transcripts, and SAT/ACT scores. Some programs may require additional documents.",
+    "application deadline": "The deadline for applications is March 15th for Fall intake and October 15th for Spring intake.",
+    "fees": "The tuition fee is $10,000 per semester for in-state students and $20,000 for out-of-state students.",
+    "scholarships": "We offer merit-based and need-based scholarships. You can apply through our financial aid portal.",
+    "contact": "You can contact the admissions office via email at admissions@college.edu or call +1-234-567-890."
+}
 
-uploaded = files.upload()
+#########################################################################33
+from transformers import BlenderbotTokenizer, BlenderbotForConditionalGeneration
 
-image = Image.open(list(uploaded.keys())[0]).convert("RGB")
+# Load pre-trained model and tokenizer
+model_name = "facebook/blenderbot-400M-distill"
+tokenizer = BlenderbotTokenizer.from_pretrained(model_name)
+model = BlenderbotForConditionalGeneration.from_pretrained(model_name)
+##################################################################################33
+def college_admission_chat():
+    print("Welcome to the College Admission Chatbot! ")
 
-image
-##########################################################
-from transformers import CLIPProcessor
-from transformers import CLIPModel
+    while True:
+        user_input = input("You: ").lower()
 
-model = CLIPModel.from_pretrained(
-    "openai/clip-vit-base-patch32"
-)
+        if user_input == "exit":
+          print("Chatbot: Thank you for reaching out! Have a great day!")
+          break
 
-processor = CLIPProcessor.from_pretrained(
-    "openai/clip-vit-base-patch32"
-)
-#############################################
-labels = [
-    "cat",
-    "dog",
-    "car",
-    "bicycle",
-    "horse"
-]
 
-inputs = processor(
-    text=labels,
-    images=image,
-    return_tensors="pt",
-    padding=True
-)
-
-outputs = model(**inputs)
-
-logits = outputs.logits_per_image
-
-probs = logits.softmax(dim=1)
-
-print(probs)
-###################################################
-from transformers import BlipProcessor
-from transformers import BlipForConditionalGeneration
-
-processor = BlipProcessor.from_pretrained(
-    "Salesforce/blip-image-captioning-base"
-)
-
-model = BlipForConditionalGeneration.from_pretrained(
-    "Salesforce/blip-image-captioning-base"
-)
-
-inputs = processor(image, return_tensors="pt")
-
-out = model.generate(**inputs)
-
-caption = processor.decode(out[0], skip_special_tokens=True)
-
-print(caption)
+        if user_input in faq:
+            print(f"Chatbot: {faq[user_input]}")
+            continue
+        elif user_input not in faq:
+            inputs = tokenizer(user_input, return_tensors="pt")
+            reply_ids = model.generate(**inputs)
+            response = tokenizer.decode(reply_ids[0], skip_special_tokens=True)
+            print(f"Chatbot: {response}")
+            continue
+########################################################################
+college_admission_chat()
