@@ -47,3 +47,27 @@ transcript = result["text"]
 
 print(transcript)
 ###################################################3
+prompt = f"""
+You are an expert meeting assistant.
+Generate professional meeting minutes.
+
+Transcript:
+
+{transcript}
+
+Include:
+1. Meeting Summary
+2. Key Discussion Points
+3. Decisions Taken
+4. Next Meeting
+
+Present everything in Markdown.
+"""
+###############################################
+meeting_response = client.models.generate_content(
+    model="gemini-3.5-flash",
+    contents=[prompt]
+)
+
+
+print(meeting_response.text)
