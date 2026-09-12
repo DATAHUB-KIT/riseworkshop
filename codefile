@@ -1,1 +1,12 @@
+from google.colab import files
+from PIL import Image
+import io
 
+uploaded = files.upload()
+
+filename = list(uploaded.keys())[0]
+
+image = Image.open(io.BytesIO(uploaded[filename]))
+
+display(image)
+###########################################################
