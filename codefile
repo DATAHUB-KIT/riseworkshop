@@ -10,3 +10,20 @@ image = Image.open(io.BytesIO(uploaded[filename]))
 
 display(image)
 ###########################################################
+prompt = """
+Read all the text visible in this image.
+
+Return ONLY the text found in the image.
+Do not describe the image.
+Do not add any extra information.
+Preserve the original wording as much as possible.
+"""
+
+response = client.models.generate_content(
+    model="gemini-3.5-flash",
+    contents=[prompt, image]
+)
+
+extracted_text = response.text
+print(extracted_text)
+######################################################
