@@ -1,38 +1,12 @@
-faq = {
-    "admission": "To apply, you need a high school diploma, transcripts, and SAT/ACT scores. Some programs may require additional documents.",
-    "application deadline": "The deadline for applications is March 15th for Fall intake and October 15th for Spring intake.",
-    "fees": "The tuition fee is $10,000 per semester for in-state students and $20,000 for out-of-state students.",
-    "scholarships": "We offer merit-based and need-based scholarships. You can apply through our financial aid portal.",
-    "contact": "You can contact the admissions office via email at admissions@college.edu or call +1-234-567-890."
-}
+from google.colab import files
+from PIL import Image
+import io
 
-#########################################################################33
-from transformers import BlenderbotTokenizer, BlenderbotForConditionalGeneration
+uploaded = files.upload()
 
-# Load pre-trained model and tokenizer
-model_name = "facebook/blenderbot-400M-distill"
-tokenizer = BlenderbotTokenizer.from_pretrained(model_name)
-model = BlenderbotForConditionalGeneration.from_pretrained(model_name)
-##################################################################################33
-def college_admission_chat():
-    print("Welcome to the College Admission Chatbot! ")
+filename = list(uploaded.keys())[0]
 
-    while True:
-        user_input = input("You: ").lower()
+image = Image.open(io.BytesIO(uploaded[filename]))
 
-        if user_input == "exit":
-          print("Chatbot: Thank you for reaching out! Have a great day!")
-          break
-
-
-        if user_input in faq:
-            print(f"Chatbot: {faq[user_input]}")
-            continue
-        elif user_input not in faq:
-            inputs = tokenizer(user_input, return_tensors="pt")
-            reply_ids = model.generate(**inputs)
-            response = tokenizer.decode(reply_ids[0], skip_special_tokens=True)
-            print(f"Chatbot: {response}")
-            continue
-########################################################################
-college_admission_chat()
+display(image)
+#######################################################
