@@ -10,3 +10,29 @@ image = Image.open(io.BytesIO(uploaded[filename]))
 
 display(image)
 #######################################################
+from google import genai
+######################################
+from google.colab import userdata
+GEMINI_API_KEY=userdata.get('YOUR KEY')
+##########################################
+client=genai.Client(api_key=GEMINI_API_KEY)
+##################################################3
+
+prompt = """
+Read all the text visible in this image.
+
+Return ONLY the text found in the image.
+Do not describe the image.
+Do not add any extra information.
+Preserve the original wording as much as possible.
+"""
+
+response = client.models.generate_content(
+    model="gemini-3.6-flash",
+    contents=[prompt, image]
+)
+
+extracted_text = response.text
+
+print("========== TEXT FROM IMAGE ==========")
+print(extracted_text)
