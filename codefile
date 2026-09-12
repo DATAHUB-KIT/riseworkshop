@@ -27,3 +27,5 @@ response = client.models.generate_content(
 extracted_text = response.text
 print(extracted_text)
 ######################################################
+https://www.rmofspringfield.ca/p/meeting-audio-files
+########################################################
